@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quanto Você Ganhou no Banheiro?</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+            background-color: rgb(141, 73, 37);
+            color: white;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #040000;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cagada remunerada <span style="font-size: 100px;">&#128169;</span> </h1>
+        <p>Digite seu salário mensal e o tempo no banheiro:</p>
+        <label>Salario em R$</label><input type="number" id="salary" placeholder="Digite seu salário mensal (R$)" step="0.01">
+        <label>Minutos no banheiro:</label><input type="number" id="time" placeholder="Tempo no banheiro (minutos)">
+        <button id="calculateButton">Calcular</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // Função para calcular o valor ganho no banheiro
+        function calculate() {
+            // Pegando os valores dos inputs
+            const salaryInput = document.getElementById('salary').value;
+            const timeInput = document.getElementById('time').value;
+
+            // Convertendo os valores para números
+            const salary = parseFloat(salaryInput);
+            const time = parseInt(timeInput);
+
+            // Validando os valores inseridos
+            if (isNaN(salary) || isNaN(time) || salary <= 0 || time <= 0) {
+                document.getElementById('result').innerText = "Por favor, insira valores válidos!";
+                return;
+            }
+
+            // Cálculo do valor ganho por minuto
+            const minutesInMonth = 30 * 8 * 60; // 30 dias, 8 horas de trabalho por dia
+            const valuePerMinute = salary / minutesInMonth;
+
+            // Total ganho no banheiro
+            const earned = valuePerMinute * time;
+
+            // Exibindo o resultado na div
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerText = `Você ganhou R$${earned.toFixed(2)} enquanto estava no banheiro!;`
+        }
+
+        // Associando o evento de clique ao botão
+        document.getElementById('calculateButton').addEventListener('click', calculate);
+    </script>
+</body>
+
+</html>
